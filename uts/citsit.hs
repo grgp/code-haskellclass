@@ -1,0 +1,1 @@
+foldr f s (x:xs) = f x (foldr f s xs)

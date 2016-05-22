@@ -1,0 +1,14 @@
+add :: Int -> Int -> Int
+add a b c -> a + b + c
+
+add 			:: (Int ->(Int -> (Int -> Int)))
+(add 2) 	:: (Int ->(Int -> Int))
+(add 2 3) :: (Int -> Int)
+(add 2 3 4) :: Int = 9
+
+multiply x y
+multiply UC = uncurry multiply
+
+multiply (2,3) no 6
+add x y = x + y
+	add UC = uncurry add
