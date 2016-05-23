@@ -22,6 +22,7 @@ update (Sto sto) v n = Sto ((n,v):sto)
 
 run :: Program -> State -> State
 
+
 data AritExp = 
      Lit Int |
      Var String |
@@ -51,6 +52,11 @@ bEval T _ = True
 bEval F _ = False
 bEval (Equal )
 
+data Program = Ass String AritExp | -- assignment sebuah variable
+               Skip | -- statement kosong (do nothing)
+               Seq Program Program | -- sequential statement composition
+               If BoolExp Program Program | -- if b then p1 else p2
+               While BoolExp Program -- while
 
 fac :: Program
 fac = Seq (Ass "x" (Lit 5))
@@ -58,3 +64,17 @@ fac = Seq (Ass "x" (Lit 5))
               (While (Neg (Equal (Var "x") (Lit 0)))
                 (Seq (Ass "y" (Mul (Var "x") (Var "y")))
                   (Ass "x" (Sub (Var "x") (Lit 1))))))
+
+-- prekondisi/initial state
+s0 :: State
+s0 = initial
+
+-- kondisi akhir state
+-- variable y berisi nilai 5!
+s1 :: State
+s1 = run fac s0
+
+-- jawaban ada di variable "y"
+y :: Int
+y = value s1 "y"
+

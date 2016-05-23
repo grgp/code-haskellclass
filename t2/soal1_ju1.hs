@@ -1,7 +1,11 @@
 showAlign :: String -> String -> String
 showAlign x y
-  | length x <= length y  = makeSpace (transform x y)
-  | otherwise             = (transform y x)
+  | length x <= length y  = 
+      makeSpace x (transform x y) ++ "\n" ++ y ++ "\n" ++ (transform x y)
+      ++ "\n" ++ show(score (transform x y)) ++ "\n"
+  | otherwise             = 
+      makeSpace y (transform y x) ++ "\n" ++ x ++ "\n" ++ (transform y x)
+      ++ "\n" ++ show(score (transform x y)) ++ "\n"
 
 transform :: String -> String -> String
 transform [] [] = []
@@ -11,6 +15,7 @@ transform (x:xs) (y:ys)
   | x == y      = '+' : (transform xs ys)
   | otherwise   = best [
                   '*' : (transform (x:xs) ys),
+                  '*' : (transform xs (y:ys)),
                   '-' : (transform xs ys)
                   ]
 
@@ -18,7 +23,7 @@ transform (x:xs) (y:ys)
 best :: [String] -> String
 best [x] = x
 best (x:xs)
-  | score x >= score b = x
+  | score x > score b = x
   | otherwise          = b
     where
       b = best xs
@@ -32,3 +37,8 @@ score (x:xs)
   | x == '*'  = (-2) + score xs
 
 makeSpace :: String -> String -> String
+makeSpace [] _ = []
+makeSpace _ [] = []
+makeSpace (x:xs) (a:as)
+  | (a == '+') || (a == '-')  = x : makeSpace xs as
+  | otherwise                 = ' ' : makeSpace (x:xs) as
