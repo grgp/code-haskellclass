@@ -14,7 +14,7 @@ transform (x:xs) (y:ys)
 
 append :: [String] -> Char -> [String]
 append [] y     = [[y]]
-append (x:xs) y = [[y] ++ x] ++ append xs y 
+append (x:xs) y = [[y] ++ x] ++ append xs y
 
 -- get the best variation of the shorter sequence
 best :: [String] -> String
@@ -25,8 +25,6 @@ best (x:xs)
     where
       b = best xs
 
-
-
 -- calculate the sequence's score
 score :: String -> Int
 score [] = 0
@@ -34,5 +32,3 @@ score (x:xs)
   | x == '+'  = 1 + score xs
   | x == '-'  = (-1) + score xs
   | x == '*'  = (-2) + score xs
-
-

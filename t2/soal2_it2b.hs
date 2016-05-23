@@ -8,7 +8,7 @@ module PriorityQueue
   size        -- PrQueue a -> Int
 ) where
 
-newtype PrQueue a = PrQ [a] deriving Show
+newtype PrQueue a = PrQ [a] deriving (Show)
 
 build :: Ord a => [a] -> PrQueue a
 build [] = PrQ []
@@ -31,6 +31,7 @@ insert (PrQ ls) x
                 )) (ls!!(parentEnd ls))
 
 parentEnd :: [a] -> Int
+parentEnd [l] = 0
 parentEnd ls = ((length ls) `div` 2 - 1)
 
 extractMin :: Ord a => PrQueue a -> (PrQueue a,a)

@@ -5,7 +5,7 @@ showAlign x y
 
 transform :: String -> String -> [String]
 transform [] [] = []
-transform xs [] = []
+transform xs [] = append (transform xs []) '*'
 transform [] (y:ys) = append (transform [] ys) '*'
 transform (x:xs) (y:ys)
   | x == y      = append (transform xs ys) '+'
