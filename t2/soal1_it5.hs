@@ -20,7 +20,7 @@ transform (x:xs) (y:ys)
 
 append :: String -> Char -> [String]
 append [] y     = [[y]]
-append (x:xs) y = [[y] ++ x] ++ append xs y 
+append (x:xs) y = [([y] ++ xs)] ++ append xs y 
 --append (x:xs) y = [([y] ++ x)] ++ append xs y 
 
 

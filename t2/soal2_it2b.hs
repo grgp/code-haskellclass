@@ -23,15 +23,15 @@ size (PrQ ls) = length ls
 insert :: Ord a => PrQueue a -> a -> PrQueue a
 insert (PrQ []) x = PrQ [x]
 insert (PrQ ls) x
-  | ls!!((length ls) `div` 2 - 1) <= x  = PrQ (ls ++ [x])
+  | ls!!(parentEnd ls) <= x   = PrQ (ls ++ [x])
   | otherwise = insert 
                 (PrQ (
-                  take ((length ls) `div` 2 - 1) ls ++ 
-                  [x] ++ drop ((length ls) `div` 2) ls
-                )) (ls!!((length ls) `div` 2 - 1))
+                  take (parentEnd ls) ls ++ 
+                  [x] ++ drop ((parentEnd ls)+1) ls
+                )) (ls!!(parentEnd ls))
 
-parent :: PrQueue a -> Int -> Int
-
+parentEnd :: [a] -> Int
+parentEnd ls = ((length ls) `div` 2 - 1)
 
 extractMin :: Ord a => PrQueue a -> (PrQueue a,a)
 extractMin (PrQ ls) = 
