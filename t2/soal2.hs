@@ -1,7 +1,7 @@
 module PriorityQueue
 (
 	PrQueue,
-	--build,			-- Ord a => [a] -> PrQueue a
+	build,			-- Ord a => [a] -> PrQueue a
 	insert, 		-- Ord a => PrQueue a -> a -> PrQueue a
 	minElement, -- PrQueue a -> a
 	extractMin,	-- Ord a => PrQueue a -> (PrQueue a,a)
@@ -10,8 +10,9 @@ module PriorityQueue
 
 newtype PrQueue a = PrQ [a] deriving Show
 
---build :: Ord a => [a] -> PrQueue a
---build ls = foldr (insert (PrQ [])) ls
+build :: Ord a => [a] -> PrQueue a
+build [] = PrQ []
+build (l:ls) = insert (build ls) l
 
 minElement :: PrQueue a -> a
 minElement (PrQ ls) = head ls
