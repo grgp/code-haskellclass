@@ -71,3 +71,4 @@ applyP (P xs) y = applyHelper 0 xs y
 applyHelper :: (Num a, Integral b) => b -> [a] -> a -> a
 applyHelper p [] y = 0
 applyHelper p (x:xs) y = x*(y^p) + (applyHelper (p+1) xs y)
+
