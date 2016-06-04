@@ -1,10 +1,13 @@
 class Eq a => MyClass a where
-  foo :: Eq a => a -> Maybe a -> Maybe a
-  goo :: MyClass a => [a]
+
   koo :: (Eq a, Eq b) => (a,b) -> Maybe a -> Maybe b
-  hoo :: MyClass a => (a,[a])
-  --curry :: ((a,b) -> c) -> a -> b -> c
-  loo :: a -> a
+  koo _ _ = Nothing
+
+  hoo :: MyClass a => (Bool,[a])
+  hoo = (False, [])
+
+--curry :: ((a,b) -> c) -> a -> b -> c
+--loo :: a -> a
 
 --foo goo :: (MyClass a, Eq a) => Maybe [a] -> Maybe [a]
 --koo hoo :: (MyClass a, MyClass [a]) => Maybe Bool -> Maybe [Bool]

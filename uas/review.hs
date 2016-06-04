@@ -14,7 +14,11 @@ data Segitiga = Segitiga {
                 }
 
 instance Eq Segitiga where
-  (Segitiga a t) == (Segitiga b u)  = (a * t) == (b * u)
+  (==) = eqTri
+  --(Segitiga a t) == (Segitiga b u)  = (a * t) == (b * u)
+
+eqTri :: Segitiga -> Segitiga -> Bool
+eqTri (Segitiga a t) (Segitiga b u) = (a * t) == (b * u)
 
 class Visible a where
   cetak :: a -> String
@@ -25,3 +29,8 @@ instance Visible a => Visible [a] where
 
 instance Visible Segitiga where
   cetak (Segitiga a t) = "seg a:" ++ show(a) ++ " t:" ++ show(t)
+
+--get 2 (filter even (ff 1 2))
+--get 2 (filter even (1 : ff 2 (3)))
+--get 2 (filter even (1 : 2 : ff 3 (5)))
+--get 2 (filter even (1 : 2 : 3 : ff 5 (8)))
